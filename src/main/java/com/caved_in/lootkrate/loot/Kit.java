@@ -14,13 +14,17 @@ public class Kit {
 	@Attribute(name = "random-item-selection")
 	private boolean randomItemSelection = false;
 
-	@ElementList (name = "items", inline = true)
-	private List<CrateItem> kitItems = new ArrayList<>();
+	@ElementList (name = "items",type = KitItem.class)
+	private List<KitItem> kitItems = new ArrayList<>();
 
-	public Kit(@Attribute (name = "name")String kitName, @Attribute(name = "random-item-selection")boolean randomItemSelection, @ElementList (name = "items", inline = true)List<CrateItem> kitItems) {
+	public Kit(@Attribute (name = "name")String kitName, @Attribute(name = "random-item-selection")boolean randomItemSelection, @ElementList (name = "items", type = KitItem.class)List<KitItem> kitItems) {
 		this.kitName = kitName;
 		this.randomItemSelection = randomItemSelection;
-		this.kitItems = kitItems;
+		this.kitItems.addAll(kitItems);
+	}
+
+	public Kit() {
+		kitItems.add(new KitItem());
 	}
 
 	public String getName() {
@@ -31,7 +35,7 @@ public class Kit {
 		return randomItemSelection;
 	}
 
-	public List<CrateItem> getCrateItems() {
+	public List<KitItem> getKitItems() {
 		return kitItems;
 	}
 

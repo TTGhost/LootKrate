@@ -1,0 +1,10 @@
+name: LootKrate
+main: com.caved_in.lootkrate.LootKrate
+version: 0.1
+description: Loot! In crates!
+author: Brandon Curtis (TheGamersCave)
+softdepend: [Commons]
+commands:
+   lootkrate:
+      description: Main command for the lootkrate plugin
+      usage: /<command>

@@ -49,7 +49,7 @@ public class LootLocation {
 		if (o instanceof Location) {
 			Location loc = (Location)o;
 			//Check If all the co-ords match and the world is the same
-			return loc.getBlockX() == x && loc.getBlockX() == y && loc.getBlockZ() == z && Worlds.getWorldName(loc).equalsIgnoreCase(worldName);
+			return loc.getBlockX() == x && loc.getBlockX() == y && loc.getBlockZ() == z;
 		}
 
 		if (o instanceof LootLocation) {
