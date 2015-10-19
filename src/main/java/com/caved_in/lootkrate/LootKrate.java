@@ -24,10 +24,10 @@ import java.util.Collection;
 public class LootKrate extends JavaPlugin {
 	public static RunnableManager threads;
 	private static Serializer serializer = new Persister();
-	private static String CONFIG_FILE_LOCATION = "plugins/LootKrate/Config.xml";
-	private static String KIT_FOLDER_LOCATION = "plugins/LootKrate/Kits/";
-	private static String CRATE_FOLDER_LOCATION = "plugins/LootKrate/Crates/";
-	private static String LOOT_LOCATION_FILE = "plugins/LootKrate/Loot-Locations.xml";
+	private static String CONFIG_FILE_LOCATION = "plugins/CarePackages/Config.xml";
+	private static String KIT_FOLDER_LOCATION = "plugins/CarePackages/Kits/";
+	private static String CRATE_FOLDER_LOCATION = "plugins/CarePackages/Crates/";
+	private static String LOOT_LOCATION_FILE = "plugins/CarePackages/CP-Locations.xml";
 
 
 	public static LootLocations lootLocations;
@@ -41,7 +41,7 @@ public class LootKrate extends JavaPlugin {
 		initConfig();
 
 		if (config == null) {
-			Commons.debug("Disabling Loot Krate, please assure the config isn't corrupt.");
+			Commons.debug("Disabling CarePackages, please assure the config isn't corrupt.");
 			Plugins.disablePlugin(this);
 			return;
 		}
@@ -80,7 +80,7 @@ public class LootKrate extends JavaPlugin {
 			try {
 				configFile.createNewFile();
 				serializer.write(new Configuration(), configFile);
-				Commons.debug("Created default config for Loot Krate");
+				Commons.debug("Created default config for CarePackages");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -99,13 +99,13 @@ public class LootKrate extends JavaPlugin {
 		if (lootConfig.exists()) {
 			try {
 				lootLocations = serializer.read(LootLocations.class, lootConfig);
-				Commons.debug("[Loot Krate] Loaded loot locations from loot-locations.xml");
+				Commons.debug("[CarePackage] Loaded CarePackage locations from cp-locations.xml");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		} else {
 			lootLocations = new LootLocations();
-			Commons.debug("[Loot Krate] Created default loot locations file @ '" + LOOT_LOCATION_FILE + "'");
+			Commons.debug("[CarePackage] Created default CarePackage locations file @ '" + LOOT_LOCATION_FILE + "'");
 			try {
 				lootConfig.createNewFile();
 				serializer.write(lootLocations, lootConfig);
@@ -119,7 +119,7 @@ public class LootKrate extends JavaPlugin {
 		File lootConfig = new File(LOOT_LOCATION_FILE);
 		try {
 			serializer.write(lootLocations, lootConfig);
-			Commons.debug("[Loot Krate] Saved loot-locations data to file.");
+			Commons.debug("[CarePackage] Saved cp-locations data to file.");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -128,7 +128,7 @@ public class LootKrate extends JavaPlugin {
 	private void initKitsConfig() {
 		File kitFolder = new File(KIT_FOLDER_LOCATION);
 		if (!kitFolder.exists()) {
-			Commons.debug(kitFolder.mkdirs() ? "[Loot Krate] Created default Kits folder" : "[Loot Krate] Unable to create the kits folder");
+			Commons.debug(kitFolder.mkdirs() ? "[CarePackage] Created default Kits folder" : "[CarePackage] Unable to create the kits folder");
 			try {
 				serializer.write(new Kit(), new File(kitFolder, "Starter Kit.xml"));
 			} catch (Exception e) {
@@ -149,23 +149,4 @@ public class LootKrate extends JavaPlugin {
 			}
 		}
 	}
-
-//	private void initCratesConfig() {
-//		File crateFolder = new File(CRATE_FOLDER_LOCATION);
-//		if (!crateFolder.exists()) {
-//			Commons.debug(crateFolder.mkdirs() ? "[Loot Krate] Created the default Crates Folder" : "[Loot Krate] Unable to create the crates folder");
-//		}
-//
-//		Folder cratesFolder = new Folder(CRATE_FOLDER_LOCATION);
-//		Commons.debug("Loading Crates from folder");
-//		for(String crateFileLocation : cratesFolder.getFiles()) {
-//			try {
-//				Crate crate = serializer.read(Crate.class,new File(crateFileLocation));
-//				KrateManager.addLootCrate(crate);
-//
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//		}
-//	}
 }
