@@ -1,10 +1,10 @@
-name: LootKrate
+name: CarePackage
 main: com.caved_in.lootkrate.LootKrate
 version: 0.1
-description: Loot! In crates!
-author: Brandon Curtis (TheGamersCave)
+description: Randomly Spawning CarePackages!
+author: CrowdedAttorney
 softdepend: [Commons]
 commands:
-   lootkrate:
-      description: Main command for the lootkrate plugin
+   cp:
+      description: Main command for the CarePackage plugin
       usage: /<command>
